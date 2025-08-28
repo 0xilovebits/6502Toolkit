@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "disassembler.h": "c",
+        "memory.h": "c",
+        "stdio.h": "c",
+        "isa.h": "c"
+    },
+    "C_Cpp.default.compilerPath": "A:/msys64/mingw32/bin/gcc.exe"
+}
