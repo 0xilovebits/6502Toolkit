@@ -1,6 +1,6 @@
 # 6502Toolkit – Disassembly, Emulation, and More
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 **6502Toolkit** is my first disassembler.  
 
