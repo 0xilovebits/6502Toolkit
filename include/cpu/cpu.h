@@ -30,6 +30,7 @@ typedef struct
 typedef struct
 {
     registers regs;
+    s64       cycles; // Executed Cycles
 
 } MOS6502;
 void cpu_init(MOS6502 *cpu);

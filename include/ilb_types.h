@@ -1,5 +1,6 @@
 #ifndef ILB_TYPES_H
 #define ILB_TYPES_H
+#include <stdbool.h>
 #include <stdint.h>
 
 typedef uint8_t  u8;

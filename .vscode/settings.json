@@ -3,7 +3,11 @@
         "disassembler.h": "c",
         "memory.h": "c",
         "stdio.h": "c",
-        "isa.h": "c"
+        "isa.h": "c",
+        "ilb_types.h": "c",
+        "cpu.h": "c"
     },
-    "C_Cpp.default.compilerPath": "A:/msys64/mingw32/bin/gcc.exe"
+    "C_Cpp.default.compilerPath": "A:/msys64/mingw32/bin/gcc.exe",
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.pythonProjects": []
 }
