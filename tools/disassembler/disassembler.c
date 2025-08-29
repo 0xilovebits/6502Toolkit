@@ -22,84 +22,84 @@ int disassemble(u16 addr, char *out, size_t out_len)
 
     if (instr.mnemonic[0] == '\0')
     {
-        //snprintf(out, out_len, "???");
+        // snprintf(out, out_len, "???");
         return 0;
     }
 
     switch (instr.addr_mode)
     {
-        case ADDR_MODE_IMPLICIT: {
+        case ADDR_IMPLIED: {
             snprintf(out, out_len, "%s", instr.mnemonic);
             return 1;
         }
 
-        case ADDR_MODE_ACCUMULATOR: {
+        case ADDR_ACCUMULATOR: {
             snprintf(out, out_len, "%s A", instr.mnemonic);
             return 1;
         }
 
-        case ADDR_MODE_IMMEDIATE: {
+        case ADDR_IMMEDIATE: {
             u8 imm = read8(addr + 1);
             snprintf(out, out_len, "%s #$%02X", instr.mnemonic, imm);
             return 2;
         }
 
-        case ADDR_MODE_ZERO_PAGE: {
+        case ADDR_ZEROPAGE: {
             u8 zp = read8(addr + 1);
             snprintf(out, out_len, "%s $%02X", instr.mnemonic, zp);
             return 2;
         }
 
-        case ADDR_MODE_ZERO_PAGE_X: {
+        case ADDR_ZEROPAGE_X: {
             u8 zp = read8(addr + 1);
             snprintf(out, out_len, "%s $%02X,X", instr.mnemonic, zp);
             return 2;
         }
 
-        case ADDR_MODE_ZERO_PAGE_Y: {
+        case ADDR_ZEROPAGE_Y: {
             u8 zp = read8(addr + 1);
             snprintf(out, out_len, "%s $%02X,Y", instr.mnemonic, zp);
             return 2;
         }
 
-        case ADDR_MODE_RELATIVE: {
+        case ADDR_RELATIVE: {
             s8  offset = (s8) read8(addr + 1);
             u16 target = addr + 2 + offset;
             snprintf(out, out_len, "%s $%04X", instr.mnemonic, target);
             return 2;
         }
 
-        case ADDR_MODE_ABSOLUTE: {
+        case ADDR_ABSOLUTE: {
             u16 a = read16(addr + 1);
             snprintf(out, out_len, "%s $%04X", instr.mnemonic, a);
             return 3;
         }
 
-        case ADDR_MODE_ABSOLUTE_X: {
+        case ADDR_ABSOLUTE_X: {
             u16 a = read16(addr + 1);
             snprintf(out, out_len, "%s $%04X,X", instr.mnemonic, a);
             return 3;
         }
 
-        case ADDR_MODE_ABSOLUTE_Y: {
+        case ADDR_ABSOLUTE_Y: {
             u16 a = read16(addr + 1);
             snprintf(out, out_len, "%s $%04X,Y", instr.mnemonic, a);
             return 3;
         }
 
-        case ADDR_MODE_INDIRECT: {
+        case ADDR_INDIRECT: {
             u16 a = read16(addr + 1);
             snprintf(out, out_len, "%s ($%04X)", instr.mnemonic, a);
             return 3;
         }
 
-        case ADDR_MODE_INDEXED_INDIRECT: { 
+        case ADDR_INDIRECT_X: {
             u8 zp = read8(addr + 1);
             snprintf(out, out_len, "%s ($%02X,X)", instr.mnemonic, zp);
             return 2;
         }
 
-        case ADDR_MODE_INDIRECT_INDEXED: { 
+        case ADDR_INDIRECT_Y: {
             u8 zp = read8(addr + 1);
             snprintf(out, out_len, "%s ($%02X),Y", instr.mnemonic, zp);
             return 2;

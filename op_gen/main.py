@@ -2,21 +2,21 @@ from bs4 import BeautifulSoup
 import re
 
 ADDR_MODE_MAP = {
-    "Implied": "ADDR_MODE_IMPLICIT",
-    "Accumulator": "ADDR_MODE_ACCUMULATOR",
-    "Immediate": "ADDR_MODE_IMMEDIATE",
-    "Zero Page": "ADDR_MODE_ZERO_PAGE",
-    "Zero Page,X": "ADDR_MODE_ZERO_PAGE_X",
-    "Zero Page,Y": "ADDR_MODE_ZERO_PAGE_Y",
-    "Relative": "ADDR_MODE_RELATIVE",
-    "Absolute": "ADDR_MODE_ABSOLUTE",
-    "Absolute,X": "ADDR_MODE_ABSOLUTE_X",
-    "Absolute,Y": "ADDR_MODE_ABSOLUTE_Y",
-    "Indirect": "ADDR_MODE_INDIRECT",
-    "Indirect,X": "ADDR_MODE_INDEXED_INDIRECT",
-    "Indirect,Y": "ADDR_MODE_INDIRECT_INDEXED",
-    "Indexed Indirect (X)": "ADDR_MODE_INDEXED_INDIRECT",
-    "Indirect Indexed (Y)": "ADDR_MODE_INDIRECT_INDEXED",
+    "Implied": "ADDR_IMPLIED",
+    "Accumulator": "ADDR_ACCUMULATOR",
+    "Immediate": "ADDR_IMMEDIATE",
+    "Zero Page": "ADDR_ZEROPAGE",
+    "Zero Page,X": "ADDR_ZEROPAGE_X",
+    "Zero Page,Y": "ADDR_ZEROPAGE_Y",
+    "Relative": "ADDR_RELATIVE",
+    "Absolute": "ADDR_ABSOLUTE",
+    "Absolute,X": "ADDR_ABSOLUTE_X",
+    "Absolute,Y": "ADDR_ABSOLUTE_Y",
+    "Indirect": "ADDR_INDIRECT",
+    "Indirect,X": "ADDR_INDIRECT_X",
+    "Indirect,Y": "ADDR_INDIRECT_Y",
+    "Indexed Indirect (X)": "ADDR_INDIRECT_X",
+    "Indirect Indexed (Y)": "ADDR_INDIRECT_Y",
 }
 
 C_HEADER = "Instruction opcode_table[256] = {\n"
@@ -82,7 +82,7 @@ if __name__ == "__main__":
                 continue
             mode_enum = ADDR_MODE_MAP[m["mode"]]
             base_cycles, extra = parse_cycles(m["cycles"])
-            entry = f'    [0x{m["opcode"]:02X}] = {{"{mnemonic}", {mode_enum}, {m["bytes"]}, {base_cycles}}},'
+            entry = f'    [0x{m["opcode"]:02X}] = OPCODE("{mnemonic}", {mode_enum}, {m["bytes"]}, {base_cycles}),'
             if extra:
                 entry += f" // {extra}"
             table.append(entry)
