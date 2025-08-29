@@ -1,21 +1,29 @@
 #include <memory/memory.h>
 #include <stdio.h>
 
-u8 mem[MEMORY_SIZE];
+Memory memory;
 
 u8 mem_read(u16 addr)
 {
-    return mem[addr];
+    if (addr < MEMORY_SIZE) return memory.mem[addr];
+    return 0xFF;
 }
 
 void mem_write(u16 addr, u8 value)
 {
-    if (addr < MEMORY_SIZE) mem[addr] = value;
+    if (addr < MEMORY_SIZE && !memory.is_read_only[addr])
+    {
+        memory.mem[addr] = value;
+    }
 }
 
 void mem_init(void)
 {
-    for (size_t i = 0; i < MEMORY_SIZE; ++i) mem[i] = 0;
+    for (size_t i = 0; i < MEMORY_SIZE; ++i)
+    {
+        memory.mem[i]          = 0;
+        memory.is_read_only[i] = 0;
+    }
 }
 
 u16 mem_load_file(const char *filename, u16 load_addr)
